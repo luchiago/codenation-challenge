@@ -2,3 +2,4 @@ venv
 python-1/__MACOSX
 codenation.exe
 python-1/__pycache__
+python-1/.pytest_cache
