@@ -2,19 +2,45 @@
 
 # Todas as perguntas são referentes ao arquivo `data.csv`
 # Você ** não ** pode utilizar o pandas e nem o numpy para este desafio.
-
+import csv
 # **Q1.** Quantas nacionalidades (coluna `nationality`) diferentes existem no arquivo?
 # 
+with open('data.csv', newline = '', encoding='utf8') as csvfile:
+	reader = csv.DictReader(csvfile)
+
+
 def q_1():
-    pass
+	nations = []
+	for row in reader:
+		n = row['nationality']
+		if n in nations:
+			pass
+		else:
+			nations.append(n)
+	print(len(nations))
+	return len(nations)
 
 # **Q2.** Quantos clubes (coluna `club`) diferentes existem no arquivo?
 def q_2():
-    pass
+    clubs = []
+    for row in reader:
+    	c = row['club']
+    	if c in clubs:
+    		pass
+    	else:
+    		clubs.append(n)
+    return len(clubs)
 
 # **Q3.** Liste o nome completo dos 20 primeiros jogadores de acordo com a coluna `full_name`.
 def q_3():
-    pass
+    length = 0
+    names = []
+    for row in reader:
+    	if length == 20:
+    		break
+    	else:
+    		names.append(row['full_name'])
+    		length += 1
 
 # **Q4.** Quem são os top 10 jogadores que ganham mais dinheiro (utilize as colunas `full_name` e `eur_wage`)?
 def q_4():
