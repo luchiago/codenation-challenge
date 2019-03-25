@@ -3,11 +3,12 @@
 # Todas as perguntas são referentes ao arquivo `data.csv`
 # Você ** não ** pode utilizar o pandas e nem o numpy para este desafio.
 import csv
+from collections import OrderedDict
 # **Q1.** Quantas nacionalidades (coluna `nationality`) diferentes existem no arquivo?
 # 
-with open('data.csv', newline = '', encoding='utf8') as csvfile:
-	reader = csv.DictReader(csvfile)
 
+reader = open('data.csv', 'r', encoding="utf8")
+reader = csv.DictReader(reader)
 
 def q_1():
 	nations = []
@@ -41,11 +42,19 @@ def q_3():
     	else:
     		names.append(row['full_name'])
     		length += 1
+    return names
 
 # **Q4.** Quem são os top 10 jogadores que ganham mais dinheiro (utilize as colunas `full_name` e `eur_wage`)?
 def q_4():
-    pass
+	salaries = {}
+	players = []
+	for row in reader:
+		salaries[row['eur_wage']] = row['full_name']
+	for salary in sorted(salaries.items(), key=lambda x: x[1], reverse=True)[:10]:
+		players.append(salary[0])
 
+	print(players)
+	#return rich
 # **Q5.** Quem são os 10 jogadores mais velhos?
 def q_5():
     pass
@@ -53,3 +62,5 @@ def q_5():
 # **Q6.** Conte quantos jogadores existem por idade. Para isso, construa um dicionário onde as chaves são as idades e os valores a contagem.
 def q_6():
     pass
+
+q_4()
