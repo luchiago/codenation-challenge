@@ -3,10 +3,9 @@
 # Todas as perguntas são referentes ao arquivo `data.csv`
 # Você ** não ** pode utilizar o pandas e nem o numpy para este desafio.
 import csv
-from collections import OrderedDict
+import heapq 
 # **Q1.** Quantas nacionalidades (coluna `nationality`) diferentes existem no arquivo?
 # 
-
 reader = open('data.csv', 'r', encoding="utf8")
 reader = csv.DictReader(reader)
 
@@ -47,20 +46,36 @@ def q_3():
 # **Q4.** Quem são os top 10 jogadores que ganham mais dinheiro (utilize as colunas `full_name` e `eur_wage`)?
 def q_4():
 	salaries = {}
-	players = []
-	for row in reader:
-		salaries[row['eur_wage']] = row['full_name']
-	for salary in sorted(salaries.items(), key=lambda x: x[1], reverse=True)[:10]:
-		players.append(salary[0])
+	s = []
 
-	print(players)
-	#return rich
+	for row in reader:
+		salaries[row['full_name']] = float(row['eur_wage'])
+
+	for salary in sorted(salaries.items(), key=lambda x: x[1], reverse=True)[:10]:
+		s.append(salary[0])
+
+	return s
 # **Q5.** Quem são os 10 jogadores mais velhos?
 def q_5():
-    pass
+	ages = {}
+	a = []
 
+	for row in reader:
+		ages[row['full_name']] = int(row['age'])
+
+	for salary in sorted(ages.items(), key=lambda x: x[1], reverse=True)[:10]:
+		a.append(salary[0])
+
+	return a
 # **Q6.** Conte quantos jogadores existem por idade. Para isso, construa um dicionário onde as chaves são as idades e os valores a contagem.
 def q_6():
-    pass
+    count_age = {}
+    
+    for row in reader:
+    	age = row['age']
+    	if age in count_age.keys():
+    		count_age[age] += 1
+    	else:
+    		count_age[age] = 1
 
-q_4()
+    return count_age
